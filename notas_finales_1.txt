@@ -1,0 +1,50 @@
+Continuar trabajando en 05_2_7.py
+
+CREAR RAMA DEVELOP
+
+
+Las variables creadas localmente al finalizar el programa son:
+  - calcular: True -> cambiar a _calcular
+  - desembolso: 500000
+  - notariado: 0.05 -> falta actualizar al monto, el porcentaje lo almacenamos en un diccionario aparte
+  - plazo_hipoteca: 30
+  - valor_casa: 250000
+
+_calcular
+
+hay un error con una entrada en desembolso puse 20.000 y me tiró 20% revisar
+
+
+Hay algo relacionado a ir creando un diccionario para almacenar la data que es necesario exportar, y tambien el formato en el que se debe expresar, y tambien aclaraciones de la proxima ejecución por ejemplo si 25% es 25% o si es 25% (color verde manzana)
+
+
+esta la parte de x_virgen para que tire ejemplos solo la primera vez que se ejecuta la funcion
+
+agregar confirmaciones a los valores ingresados por el usuario
+
+
+Revisar si hay TODO: 3_10 en el packpy fichero 2_7
+
+
+CONTAR LINEAS ANTES DE TERMINAR EL DIA
+
+Empezar y Terminar objeto ingreso_tasa
+
+...
+TABLA DE PAGO-HIPOTECA-AHORRO-INVERSION - LA LARGA DE ABAJO - PANDAS NO?
+Arrancar y terminar luego de revisar el video
+tomar notas de la tabla inferior o revisar notas_agraciadas txt
+
+o recortar audio y sacar silencios y escuchar cada parte para ver si me da data
+
+>> TENER EN CUENTA revisar el video y extraer partes que te sirvan para tu explicacion del proyecto
+
+...
+
+
+DESCARGAR ARCHIVOS EN CSV LA PARTE LARGA DE ABAJO
+
+Y PARA LA TABLA de entrada, sale en formato xlsm
+
+PyInstaller
+

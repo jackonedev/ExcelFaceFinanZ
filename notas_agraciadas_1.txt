@@ -1,0 +1,61 @@
+un algoritmo que te diga cuanto vas a estar 
+pagando a futuro por una financiación dadas 
+las constantes de la tabla de arriba 
+a la izquierda
+
+30 años de pagar a este X interes
+
+el interés se aplica de forma anual
+
+Entonces 1 vez al año se aplica el cálculo, y se divide por la cantidad de meses.
+
+Valor_hogar = x_1
+desemebolso = x_2
+notariado = x_3
+plazo_hipoteca (en años) = x_4
+interes_anual = x_5
+
+
+def pago_mensual_alquiler(plazo, interes, monto_restate):
+"""esta funcion nos permite calcular el monto que se deberá abonar en concepto de alquiler, de modo que cueste lo mismo que comprarla"
+
+    interes_mensual = interes/12
+    plazo_mensual = plazo * 12
+    
+
+def deuda_restante(deuda_restante, cuota_mensual):
+	"""proporcionalmente se paga más interés al comienzo del período que el último mes del período."""
+
+        deuda_restante_actualizada = x_6
+	pago_interes_mes = x_7
+	return deuda_restante_actualizada, pago_interes_mes
+
+
+
+Entiendo el concepto de orden de prioridad en el uso del dinero.
+
+Entonces desde el supuesto de la tabla de arriba a la izquierda, las condiciones que se deben cumplir son:
+
+ingreso = int
+
+primer_gasto = hipoteca_alquiler
+segundo_gasto = gastos_mantenimiento
+tercer_gasto = gastos_suministros
+cuarto_gasto = cash_lifestyle
+
+def gasto_total(primer, segundo, tercer, cuarto, bool_1=True, bool_2=True, bool_3=True, bool_4=True):# TODO, reemplazar los bools por 1 solo elemento llamado "mascara"
+    gasto_total = 0
+    if bool_1:
+	gasto_total += primer
+    if bool_2:
+	gasto_total += segundo
+    if bool_3:
+	...
+def ahorro_mensual():
+	pass
+def cash_usado_mes_pct():
+    	pass
+
+
+
+def cash_usado_mes_pct(ingreso,):
