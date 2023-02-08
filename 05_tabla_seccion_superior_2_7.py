@@ -18,105 +18,133 @@ variables para el calculo de la hipoteca:
 
 Pendiente: datetime
 """
-from packpy.ingresar_datos_2_7 import ingresar_numerico, ingresar_cifra, ingresar_agno
 
-def elegir_simbolo_moneda(Europa=True):
-    if Europa:
-        America = False
-        mon_sym = '¤'
-    elif not Europa:
-        America = True
-        mon_sym = '$'
-    print 'Simbolo: {}'.format(mon_sym)
-    return mon_sym
+# IMPORTAMOS LIBRERIAS
+
+"Å“"
+from packpy.elegir_formato_2_7 import elegir_moneda_sistema# -> http://www.python.org/peps/pep-0263.html
+from packpy.ingresar_datos_2_7 import ingresar_numerico, ingresar_cifra, ingresar_agno, ingresar_tasa
+from packpy.almacenar_datos import Dicto
+
 
 
 def main():
 #    global ingreso, hip_alquiler, mantenimiento
 #    global suministros, lifestyle, extra
-
     global mon_sym
+    global valor_casa, desembolso, notariado, plazo_agno, tasa_interes    
+
 
     print '\t======'*5
     print '\t  BIENVENIDO A LA GESTORA FINANCIERA!'
     print '\t======'*5
     print
-    
-    print '\nDeterminando formato moneda por default:'
-    mon_sym = elegir_simbolo_moneda()
-
-
-    print '\nPROVEA los siguientes datos por favor:'
-    
-
-
+    print '\n>>  Determinando formato moneda por default:'
+    mon_sym = elegir_moneda_sistema(Europa=True)
+    if mon_sym == 'euro':
+        mon_sym = '¤'
+    print 'Simbolo: {}'.format(mon_sym)
+    print '\n>>  PROVEA los siguientes datos por favor:'
 #    if not gestora_de_dinero():
 #        print 'Saliendo del programa'
 #        return
-
-
-
-    almacenar_datos = {}#Dicto()
-
-
     print 'Pasando gestora_de_dinero()\nIngresando al programa'
     print
-    print 'Definimos VALOR CASA a 2.200.000'
+    
+
+
+
+    """Por favor, a continuacion no utilice el caracter "-"  """
+    almacenar_datos = Dicto(name='hip_alquiler')
+
+
+
+
+    print '>>  Definimos VALOR CASA a 2.200.000'
     valor_casa = ingresar_numerico('valor_casa')
-
-    almacenar_datos.ingresar('valor_casa', valor_casa)
-    almacenar_datos.prefijo(mon_sym).sufijo('%')
-    print almacenar_datos
-
-    print 'Confirmo que usted ha ingresado â‚¬{}'.format(valor_casa)
     if not valor_casa:
         print 'error'
         return
+    almacenar_datos.ingresar('valor_casa', valor_casa)
+    almacenar_datos.prefijo(mon_sym)
+    print 'Confirmando valor -> ', almacenar_datos
+
     print
 
-    print 'Definamos un VALOR DE DESEMBOLSO'
-    # ERRORES
-    # 25.000 > 25%
+    print '>>  Definamos un VALOR DE DESEMBOLSO'
+    # ERRORES#TODO
+    # 25.000 -> 25%
     _calcular, desembolso = ingresar_cifra('Desembolso')
-    if _calcular:
-        print 'El porcentaje de desembolso: {}%'.format(desembolso*100)
-        print 'Desembolso: ', desembolso*valor_casa
-    else:
-        print 'El porcentaje de desembolso: {}%'.format(desembolso/valor_casa*100)
-        print 'Desembolso: ', desembolso
-    print
-    
-    print 'Definimos la cifra ESCRIBANIA'
-    _calcular, notariado = ingresar_cifra('Notariado')
-    if _calcular:
-        print 'El porcentaje de Notariado: {}%'.format(notariado*100)
 
-        print 'Notariado: ', notariado*valor_casa
+    if not desembolso:
+        print 'error'
+        return
+    if _calcular:
+        porcentaje = desembolso *100
+        valor = int(desembolso*valor_casa)
     else:
-        print 'El porcentaje de Notariado: {}%'.format(notariado/valor_casa*100)
-        print 'Notariado: ', notariado
+        porcentaje = float(desembolso)/float(valor_casa)*100
+        valor = int(desembolso)
     
-    print 'Definimos PLAZO de hipoteca a 30 agnos'
-    plazo_hipoteca = ingresar_agno('plazo_hipoteca')
-    if not plazo_hipoteca:
+    almacenar_datos.ingresar('desembolso', valor)
+    almacenar_datos.prefijo(mon_sym)
+    print 'Desembolso -> {}'.format(almacenar_datos)
+    almacenar_datos.ingresar('desembolso_porcentaje', porcentaje)
+    almacenar_datos.sufijo('%')
+    print 'El porcentaje de desembolso -> {}'.format(almacenar_datos)
+    
+    print   
+
+    print '>>  Definimos la cifra ESCRIBANIA'
+    campo = 'Notariado'
+    _calcular, notariado = ingresar_cifra(campo)
+    if not notariado:
+        print 'error'
+        return
+    if _calcular:
+        porcentaje = notariado *100
+        valor = int(notariado*valor_casa)
+    else:
+        porcentaje = float(notariado)/float(valor_casa)*100
+        valor = int(notariado)
+    ##DRY
+    almacenar_datos.ingresar(campo.lower().replace(' ','_'), valor)
+    almacenar_datos.prefijo(mon_sym)
+    print 'Valor {} -> {}'.format(campo, almacenar_datos)
+    almacenar_datos.ingresar(campo.lower().replace(' ','_')+'_pct', porcentaje)
+    almacenar_datos.sufijo('%')
+    print 'Porcenaje {} -> {}'.format(campo, almacenar_datos)
+    
+    print
+
+    print '>>  Definimos PLAZO de hipoteca a 30 agnos'
+    campo = 'Plazo Agnos'
+    plazo_agno = ingresar_agno('plazo_hipoteca')
+    if not plazo_agno:
         print 'Saliendo del programa'
         return
+    almacenar_datos.ingresar(campo.lower().replace(' ','_'), plazo_agno)
+    almacenar_datos.sufijo('Agnos')### TODO
+    print 'Valor {} -> {}'.format(campo, almacenar_datos)
+
+    print
+
+    print '>>  Definamos TASA DE INTERES'
+    campo = 'Tasa Interes'
+    tasa_interes = ingresar_tasa()
+    if not tasa_interes:
+        print 'error en main'
+        return
+    almacenar_datos.ingresar(campo.lower().replace(' ','_'), plazo_agnos)
+    almacenar_datos.prefijo(mon_sym)
+    print 'Valor {} -> {}'.format(campo, almacenar_datos)      
 
 
-    print '\nContinuar con el programa...\n'
-    
+    print '\nContinuar con el programa...\n'    
     print 'Antes de salir fijate las variables que tenes!!!!!'
-    
     print 'TODO: CIFRA INTERES'
-    print 
+    print dir()
     
 
 if __name__ == '__main__':
     main()
-
-    
-    
-
-
-
-

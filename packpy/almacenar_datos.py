@@ -22,7 +22,7 @@ class Dicto:
         self.dicture[key_label] = '' 
         
     def nombre_key_dicto(self, nombre_variable):#METODO INTERNO
-        self.copia_contador = next(self.contador)#ESTE: debería ser el único next() que uso y me quedo con la copia
+        self.copia_contador = next(self.contador)#ESTE: unico next()
         return 'z{}-{}-{}'.format(self.copia_contador, nombre_variable, self.name)
       
     def nombre_key_dicture(self, nombre_variable):
@@ -75,6 +75,7 @@ class Dicto:
         for elemento in self.dicto.keys():
             if elemento == key:
                 valor = self.dicto[key]
+                valor = round(valor, 2)
                 valor = str(valor).replace(' ', '_').replace('.', ',')
         self.dicture[key] = '{} {}'.format(valor, sufix)
         
@@ -83,4 +84,6 @@ class Dicto:
         for elemento in self.dicture.keys():
             if elemento == key:
                 label = self.dicture[key]
-        return 'Mostrando ultimo registro: {}'.format(label)
+        key = key.split('-')
+        key = key[0].replace('z','')
+        return 'regz{}: {}'.format(key, label)
