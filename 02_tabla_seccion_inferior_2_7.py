@@ -17,7 +17,7 @@ from openpyxl import Workbook
 wb = Workbook()
 """
 from itertools import count
-from packpy.ingresar_datos import ingresar_numerico
+from packpy.ingresar_datos_2_7 import ingresar_numerico
 
 def cargar_variables():
     """
@@ -26,21 +26,21 @@ def cargar_variables():
     
     Las variables:
         - ingreso: Sueldo Mensual
-        - alquiler: Hip/Alquiler Mensual
+        - hip_alquiler: Hip/Alquiler Mensual
         - mantenimiento: Gastos de Mantenimiento
         - suministros: Gastos de Suministros
         - lifestyle: Cash Lifestyle
         - extra: variable de repuesto
     """
-    global ingreso, hipoteca, alquiler, mantenimiento
+    global ingreso, hip_alquiler, mantenimiento
     global suministros, lifestyle, extra
 
     ingreso = ingresar_numerico('Sueldo Mensual')
     if not ingreso:
         return
 
-    alquiler = ingresar_numerico('Alquiler Mensual')#TODO: esta variable requiere un calculo aparte
-    if not alquiler:
+    hip_alquiler = ingresar_numerico('Alquiler Mensual')#TODO: esta variable requiere un calculo aparte
+    if not hip_alquiler:
         return
 
     mantenimiento = ingresar_numerico('Gastos de Mantenimiento')
@@ -56,8 +56,8 @@ def cargar_variables():
         return
 
     extra = ''
-    print()
-    return [ingreso, alquiler, mantenimiento,\
+    print
+    return [ingreso, hip_alquiler, mantenimiento,\
             suministros, lifestyle, extra]
 
 
@@ -66,10 +66,10 @@ def gestora_de_dinero():
     constantes = cargar_variables()
     
     if not constantes:
-        print( 'EJECUCION INTERRUMPIDA')
+        print 'EJECUCION INTERRUMPIDA'
         return 
 
-    print( 'Creamos ambos escenarios financieros: HIPOTECA Y ALQUILER')
+    print 'Creamos ambos escenarios financieros: HIPOTECA Y ALQUILER'
 
     constantes_dicc = {
     'Sueldo_Mensual': constantes[0],
@@ -104,7 +104,7 @@ def gestora_de_dinero():
 def main():
     global contador_principal, contador_secundario_numerico
 
-    global ingreso, alquiler, mantenimiento
+    global ingreso, hip_alquiler, mantenimiento
     global suministros, lifestyle, extra
     global paga_hipoteca, paga_alquiler
     
@@ -112,26 +112,26 @@ def main():
     contador_principal = count(1)
     contador_secundario_numerico = count(1)
 
-    print( '\t======'*5)
-    print( '\t  BIENVENIDO A LA GESTORA FINANCIERA!')
-    print( '\t======'*5)
-    print( '\n>> {}) Provea los siguientes datos por favor:'.format(next(contador_principal)))
+    print '\t======'*5
+    print '\t  BIENVENIDO A LA GESTORA FINANCIERA!'
+    print '\t======'*5
+    print '\n>> {}) Provea los siguientes datos por favor:'.format(next(contador_principal))
     
     if not gestora_de_dinero():#TODO: debe retornar algo
-        print( 'Error en gestora_de_dinero()\nSaliendo del programa')
+        print 'Error en gestora_de_dinero()\nSaliendo del programa'
         return
     
-    print()
-    print( 'El escenario de PAGA HIPOTECA es: ')
+    print
+    print 'El escenario de PAGA HIPOTECA es: '
     for llave, valor in paga_hipoteca.items():
-        print( '{}: {}'.format(llave, valor))
-    print()
-    print( 'El escenario de PAGA ALQUILER es: ')
+        print '{}: {}'.format(llave, valor)
+    print
+    print 'El escenario de PAGA ALQUILER es: '
     for llave, valor in paga_alquiler.items():
-        print( '{}: {}'.format(llave, valor))
+        print '{}: {}'.format(llave, valor)
 
 
-    print( '\nContinuar con el programa')
+    print '\nContinuar con el programa'
 
 if __name__ == '__main__':
     main()

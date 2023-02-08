@@ -236,6 +236,9 @@ def ingresar_tasa():
     if not tasa:
         print 'return'
         return
+    if tasa.count('%') != 0:
+        print 'No se acepta el caracter "%"'
+        return
     if tasa.isdigit():
         if 1 < int(tasa) < 100:
             print '1-'
@@ -255,8 +258,13 @@ def ingresar_tasa():
         if int(float(tasa)) == 0:
             print '3-'
             return float(tasa)
+        
+        elif 0 < int(float(tasa)) < 100:
+            print '3-'
+            return float(tasa) /100
+
         else:
-            print '3- error'## corregir que 2.5 da error
+            print '3- error'
             return
     else:
         print 'tasa- error'

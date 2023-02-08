@@ -50,6 +50,7 @@ def main():
 #        return
     print 'Pasando gestora_de_dinero()\nIngresando al programa'
     print
+    print
     
 
 
@@ -69,6 +70,7 @@ def main():
     almacenar_datos.prefijo(mon_sym)
     print 'Confirmando valor -> ', almacenar_datos
 
+    print
     print
 
     print '>>  Definamos un VALOR DE DESEMBOLSO'
@@ -94,7 +96,8 @@ def main():
     print 'El porcentaje de desembolso -> {}'.format(almacenar_datos)
     
     print   
-
+    print
+    
     print '>>  Definimos la cifra ESCRIBANIA'
     campo = 'Notariado'
     _calcular, notariado = ingresar_cifra(campo)
@@ -116,7 +119,8 @@ def main():
     print 'Porcenaje {} -> {}'.format(campo, almacenar_datos)
     
     print
-
+    print
+    
     print '>>  Definimos PLAZO de hipoteca a 30 agnos'
     campo = 'Plazo Agnos'
     plazo_agno = ingresar_agno('plazo_hipoteca')
@@ -128,6 +132,7 @@ def main():
     print 'Valor {} -> {}'.format(campo, almacenar_datos)
 
     print
+    print
 
     print '>>  Definamos TASA DE INTERES'
     campo = 'Tasa Interes'
@@ -135,8 +140,8 @@ def main():
     if not tasa_interes:
         print 'error en main'
         return
-    almacenar_datos.ingresar(campo.lower().replace(' ','_'), plazo_agnos)
-    almacenar_datos.prefijo(mon_sym)
+    almacenar_datos.ingresar(campo.lower().replace(' ','_'), tasa_interes)
+    almacenar_datos.sufijo('%')
     print 'Valor {} -> {}'.format(campo, almacenar_datos)      
 
 

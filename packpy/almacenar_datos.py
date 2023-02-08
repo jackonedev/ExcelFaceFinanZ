@@ -75,7 +75,8 @@ class Dicto:
         for elemento in self.dicto.keys():
             if elemento == key:
                 valor = self.dicto[key]
-                valor = round(valor, 2)
+                if isinstance(valor, float):#CHECK
+                  valor = round(valor, 2)
                 valor = str(valor).replace(' ', '_').replace('.', ',')
         self.dicture[key] = '{} {}'.format(valor, sufix)
         
