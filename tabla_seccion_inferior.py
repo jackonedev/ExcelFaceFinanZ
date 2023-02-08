@@ -129,7 +129,9 @@ def main():
         print( '{}: {}'.format(llave, valor))
 
 
-    print( '\nContinuar con el programa')
+    print( '\nTerminando el programa')
+
+    return paga_alquiler, paga_hipoteca
 
 if __name__ == '__main__':
     main()

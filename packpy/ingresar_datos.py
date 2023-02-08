@@ -241,7 +241,7 @@ def ingresar_tasa():
     if tasa.isdigit():
         if 1 < int(tasa) < 100:
             print( '1-')
-            return float(tasa)/100
+            return float(tasa)
         else:
            print( '1- error')
            return

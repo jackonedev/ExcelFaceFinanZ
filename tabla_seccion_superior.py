@@ -143,13 +143,13 @@ def main():
     print( 'Valor {} -> {}'.format(campo, almacenar_datos)      )
 
 
-    print( '\nTerminando la ejecución del programa...\n'    )
-    print( 'Las variables almacenadas son!!!!!')
+    print( '\nContinuando la ejecución del programa...\n'    )
+   # print( 'Las variables almacenadas son!!!!!')
 
     #print( dir())
-    print (almacenar_datos.dicto)
+    #print (almacenar_datos.dicto)
 
     
-
+    return almacenar_datos
 if __name__ == '__main__':
     main()
