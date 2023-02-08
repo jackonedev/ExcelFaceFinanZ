@@ -102,31 +102,29 @@ def gestora_de_dinero():
     return True
 
 def main():
-    global contador_principal, contador_secundario_numerico
-
     global ingreso, alquiler, mantenimiento
     global suministros, lifestyle, extra
     global paga_hipoteca, paga_alquiler
     
 
     contador_principal = count(1)
-    contador_secundario_numerico = count(1)
+
 
     print( '\t======'*5)
     print( '\t  BIENVENIDO A LA GESTORA FINANCIERA!')
     print( '\t======'*5)
-    print( '\n>> {}) Provea los siguientes datos por favor:'.format(next(contador_principal)))
+    print( '\n>> {})  Provea los siguientes datos por favor:'.format(next(contador_principal)))
     
     if not gestora_de_dinero():#TODO: debe retornar algo
         print( 'Error en gestora_de_dinero()\nSaliendo del programa')
         return
     
     print()
-    print( 'El escenario de PAGA HIPOTECA es: ')
+    print( '>> {})  El escenario de PAGA HIPOTECA es: '.format(next(contador_principal)))
     for llave, valor in paga_hipoteca.items():
         print( '{}: {}'.format(llave, valor))
     print()
-    print( 'El escenario de PAGA ALQUILER es: ')
+    print( '>> {})  El escenario de PAGA ALQUILER es: '.format(next(contador_principal)))
     for llave, valor in paga_alquiler.items():
         print( '{}: {}'.format(llave, valor))
 

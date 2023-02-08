@@ -19,47 +19,137 @@ variables para el calculo de la hipoteca:
 Pendiente: datetime
 """
 
-from packpy.ingresar_datos import ingresar_numerico, ingresar_cifra, ingresar_agno
+# IMPORTAMOS LIBRERIAS
+from itertools import count
+
+from packpy.elegir_formato import elegir_moneda_sistema# -> http://www.python.org/peps/pep-0263.html
+from packpy.ingresar_datos import ingresar_numerico, ingresar_cifra, ingresar_agno, ingresar_tasa
+from packpy.almacenar_datos import Dicto
+
+
 
 def main():
 #    global ingreso, hip_alquiler, mantenimiento
 #    global suministros, lifestyle, extra
+    global mon_sym
+    global valor_casa, desembolso, notariado, plazo_año, tasa_interes    
 
+
+    contador_principal = count(1)
 
     print( '\t======'*5)
     print( '\t  BIENVENIDO A LA GESTORA FINANCIERA!')
     print( '\t======'*5)
-    print( 'Provea los siguientes datos por favor:')
-    
+    print()
+    print( '\n>>  Determinando formato moneda por default:')
+    mon_sym = elegir_moneda_sistema(Europa=True)
+    print( 'Simbolo: {}'.format(mon_sym))
+    print( '\n>>  PROVEA los siguientes datos por favor:')
 #    if not gestora_de_dinero():
 #        print( 'Saliendo del programa')
 #        return
-
-    print( 'Pasando gestora_de_dinero()\nContinua el programa')
+    print( 'Pasando gestora_de_dinero()\nIngresando al programa')
+    print()
+    print()
     
 
-    print( 'Definimos valor casa a 2.200.000')
+
+
+    """Por favor, a continuacion no utilice el caracter "-"  """
+    almacenar_datos = Dicto(name='hip_alquiler')
+
+
+
+
+    print( '>> {})  Definimos VALOR CASA a 2.200.000'.format(next(contador_principal)))
     valor_casa = ingresar_numerico('valor_casa')
-    calcular, desembolso = ingresar_cifra()
-    if calcular:
-        print( 'Desembolso: ', desembolso*valor_casa)
+    if not valor_casa:
+        print( 'error')
+        return
+    almacenar_datos.ingresar('valor_casa', valor_casa)
+    almacenar_datos.prefijo(mon_sym)
+    print( 'Confirmando valor -> ', almacenar_datos)
 
-    calcular, notariado = ingresar_cifra()
-    if calcular:
-        print( 'Notariado: ', notariado*valor_casa)
+    print()
+    print()
+
+    print( '>> {})  Definamos un VALOR DE DESEMBOLSO'.format(next(contador_principal)))
+    _calcular, desembolso = ingresar_cifra('Desembolso')
+
+    if not desembolso:
+        print( 'error')
+        return
+    if _calcular:
+        porcentaje = desembolso *100
+        valor = int(desembolso*valor_casa)
+    else:
+        porcentaje = float(desembolso)/float(valor_casa)*100
+        valor = int(desembolso)
     
-    print( 'Definimos plazo de hipoteca a 30 años')
-    plazo_hipoteca = ingresar_agno('plazo_hipoteca')
-    if not plazo_hipoteca:
+    almacenar_datos.ingresar('desembolso', valor)
+    almacenar_datos.prefijo(mon_sym)
+    print( 'Desembolso -> {}'.format(almacenar_datos))
+    almacenar_datos.ingresar('desembolso_porcentaje', porcentaje)
+    almacenar_datos.sufijo('%')
+    print( 'El porcentaje de desembolso -> {}'.format(almacenar_datos))
+    
+    print()
+    print()
+    
+    print( '>> {})  Definimos la cifra ESCRIBANIA'.format(next(contador_principal)))
+    campo = 'Notariado'
+    _calcular, notariado = ingresar_cifra(campo)
+    if not notariado:
+        print( 'error')
+        return
+    if _calcular:
+        porcentaje = notariado *100
+        valor = int(notariado*valor_casa)
+    else:
+        porcentaje = float(notariado)/float(valor_casa)*100
+        valor = int(notariado)
+    ##DRY
+    almacenar_datos.ingresar(campo.lower().replace(' ','_'), valor)
+    almacenar_datos.prefijo(mon_sym)
+    print( 'Valor {} -> {}'.format(campo, almacenar_datos))
+    almacenar_datos.ingresar(campo.lower().replace(' ','_')+'_pct', porcentaje)
+    almacenar_datos.sufijo('%')
+    print( 'Porcenaje {} -> {}'.format(campo, almacenar_datos))
+    
+    print()
+    print()
+    
+    print( '>> {})  Definimos PLAZO de hipoteca a 30 años'.format(next(contador_principal)))
+    campo = 'Plazo Años'
+    plazo_año = ingresar_agno('plazo_hipoteca')
+    if not plazo_año:
         print( 'Saliendo del programa')
         return
+    almacenar_datos.ingresar(campo.lower().replace(' ','_'), plazo_año)
+    almacenar_datos.sufijo('Años')
+    print( 'Valor {} -> {}'.format(campo, almacenar_datos))
+
+    print()
+    print()
+
+    print( '>> {})  Definamos TASA DE INTERES'.format(next(contador_principal)))
+    campo = 'Tasa Interes'
+    tasa_interes = ingresar_tasa()
+    if not tasa_interes:
+        print( 'error en main')
+        return
+    almacenar_datos.ingresar(campo.lower().replace(' ','_'), tasa_interes)
+    almacenar_datos.sufijo('%')
+    print( 'Valor {} -> {}'.format(campo, almacenar_datos)      )
+
+
+    print( '\nTerminando la ejecución del programa...\n'    )
+    print( 'Las variables almacenadas son!!!!!')
+
+    #print( dir())
+    print (almacenar_datos.dicto)
+
+    
 
 if __name__ == '__main__':
     main()
-
-    
-    
-
-
-
-

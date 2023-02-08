@@ -211,8 +211,8 @@ posibles variantes de entradas de test:
 
 def ingresar_agno(label):
     global agno, contador_secundario_numerico
-    print( '{}) Provea "plazo en agnos" - un numero entero'.format(next(contador_secundario_numerico)))
-    agno = input('Declarar plazo en agnos = ')
+    print( '{}) Provea "plazo en años" - un numero entero'.format(next(contador_secundario_numerico)))
+    agno = input('Declarar plazo en años = ')
     if not agno:
       print( 'return')
       return
@@ -248,7 +248,7 @@ def ingresar_tasa():
     elif tasa.replace(',','').isdigit() and tasa.count(',') == 1:
         if int(float(tasa.replace(',','.'))) == 0:
             print( '2-')
-            return float(tasa.replace(',','.'))
+            return float(tasa.replace(',','.')) *100
         else:
             print( '2- error')
             return
@@ -256,11 +256,11 @@ def ingresar_tasa():
 
         if int(float(tasa)) == 0:
             print( '3-')
-            return float(tasa)
+            return float(tasa) *100
         
         elif 0 < int(float(tasa)) < 100:
             print( '3-')
-            return float(tasa) /100
+            return float(tasa)
 
         else:
             print( '3- error')
