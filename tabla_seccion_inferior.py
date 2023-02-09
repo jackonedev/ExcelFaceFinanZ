@@ -35,19 +35,19 @@ def cargar_variables():
     global ingreso, hipoteca, alquiler, mantenimiento
     global suministros, lifestyle, extra
 
-    ingreso = ingresar_numerico('Sueldo Mensual')
+    ingreso = ingresar_numerico('Ingreso Mensual')
     if not ingreso:
         return
 
-    alquiler = ingresar_numerico('Alquiler Mensual')#TODO: esta variable requiere un calculo aparte
+    alquiler = ingresar_numerico('Alquiler Mensual ')#TODO: esta variable requiere un calculo aparte
     if not alquiler:
         return
 
-    mantenimiento = ingresar_numerico('Gastos de Mantenimiento')
+    mantenimiento = ingresar_numerico('Mantenimiento Mensual')
     if not mantenimiento:
         return
 
-    suministros = ingresar_numerico('Gasto Suministros')
+    suministros = ingresar_numerico('Suministros Mensuales')
     if not suministros:
         return
 
@@ -107,7 +107,7 @@ def main():
     global paga_hipoteca, paga_alquiler
     
 
-    contador_principal = count(1)
+    contador_principal = count(1)#TODO: no tiene sentido creo
 
 
     print( '\t======'*5)
@@ -120,13 +120,13 @@ def main():
         return
     
     print()
-    print( '>> {})  El escenario de PAGA HIPOTECA es: '.format(next(contador_principal)))
-    for llave, valor in paga_hipoteca.items():
-        print( '{}: {}'.format(llave, valor))
-    print()
-    print( '>> {})  El escenario de PAGA ALQUILER es: '.format(next(contador_principal)))
-    for llave, valor in paga_alquiler.items():
-        print( '{}: {}'.format(llave, valor))
+    # print( '>> {})  El escenario de PAGA HIPOTECA es: '.format(next(contador_principal)))
+    # for llave, valor in paga_hipoteca.items():
+    #     print( '{}: {}'.format(llave, valor))
+    # print()
+    # print( '>> {})  El escenario de PAGA ALQUILER es: '.format(next(contador_principal)))
+    # for llave, valor in paga_alquiler.items():
+    #     print( '{}: {}'.format(llave, valor))
 
 
     print( '\nTerminando el programa')

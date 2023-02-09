@@ -89,7 +89,7 @@ def main():
     almacenar_datos.ingresar('desembolso', valor)
     almacenar_datos.prefijo(mon_sym)
     # print( 'Desembolso -> {}'.format(almacenar_datos))
-    almacenar_datos.ingresar('desembolso_porcentaje', porcentaje)
+    almacenar_datos.ingresar('desembolso_pct', porcentaje)
     almacenar_datos.sufijo('%')
     # print( 'El porcentaje de desembolso -> {}'.format(almacenar_datos))
     

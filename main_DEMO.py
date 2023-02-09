@@ -48,6 +48,7 @@ def imprimir_variables(dicc):
 def main2():
     mon_sym = elegir_moneda_sistema()
 
+    print ('\nARRANCANDO PARTE 1 DE LA DEMO:')
     almacenamiento_datos = main()
     print ('\nCHECKEO DEL VALOR DE LA VARIABLE')
     imprimir_variables(almacenamiento_datos.dicto)
@@ -65,17 +66,64 @@ def main2():
         almacenamiento_datos.ingresar(llave, dicc[llave])
         almacenamiento_datos.lista(prefix=mon_sym)
 
-    time.sleep(0.4)
     print ('\nFINALIZANDO PARTE 1 DE LA DEMO:')
     time.sleep(0.4)
-    print ('\nCHECKEO DEL VALOR DE LA VARIABLE')
     time.sleep(0.4)
+    print ('\nCHECKEO DEL VALOR DE LA VARIABLE')
     imprimir_variables(almacenamiento_datos.dicto)
     time.sleep(0.4)
-    print ('\nCHECKEO DEL FORMATO DE LA VARIABLE')
     time.sleep(0.4)
+    print ('\nCHECKEO DEL FORMATO DE LA VARIABLE')
     imprimir_variables(almacenamiento_datos.dicture)
     time.sleep(0.4)
+    time.sleep(0.4)
+    print ('\nEXPORTANDO EN CSV LA TABLA DE CUOTAS FUTURAS: (no implementado)')
+    #TODO: llevar a pandas.DataFrame y exportar a csv
+    #TODO: si los values son list, y las list tienen mismo len, devolver DataFrame
+    print ('\nARRANCANDO PARTE 2 DE LA DEMO:')
 
 
+    ## IMPORTANTE AL LECTOR:
+    """Esta parte fue el comienzo del desarrollo de TODO el código, y hay mucho que se va a implementar a continuación que debe ser removida he implementado dentro de los modulos importados"""
+    from tabla_seccion_inferior import main
+    estructura_alquiler, estructura_compra = main()#TODO: aplicar almacenar datos
+    # EJEMPLO: Ahora tengo que actualizar los valor de las estructuras_i, y volver a calcular el ahorro y el pct_Cash_Req/Mes
+    # EJEMPLO: Le tengo que agregar "capital_inicial" = desembolso + notariado
+
+    estructura_alquiler['capital_inicial'] = buscar_valor('desembolso', almacenamiento_datos) + buscar_valor('notariado', almacenamiento_datos)
+    estructura_compra['capital_inicial'] = estructura_alquiler['capital_inicial']
+
+    label_notariado = buscar_valor('notariado_pct', almacenamiento_datos)
+    label_desembolso = buscar_valor('desembolso_pct', almacenamiento_datos)
+
+    estructura_compra[f'notariado {label_notariado} %'] = - buscar_valor('notariado', almacenamiento_datos)
+    estructura_compra[f'desembolso {label_desembolso} %'] = - buscar_valor('desembolso', almacenamiento_datos)
+    estructura_alquiler[f'notariado {label_notariado} %'] = 0
+    estructura_alquiler[f'desembolso {label_desembolso} %'] = 0
+    
+    estructura_compra['Hip/Alquiler_Mensual'] = - cuota
+    estructura_compra['Ahorros_Mensuales'] += estructura_alquiler['Hip/Alquiler_Mensual'] - cuota
+    estructura_compra['pct_Cash_Req/Mes'] = int((float(estructura_compra['Sueldo_Mensual']) - float(estructura_compra['Ahorros_Mensuales'])) / float(estructura_compra['Sueldo_Mensual']) *100)
+    estructura_alquiler['pct_Cash_Req/Mes'] = int(estructura_alquiler['pct_Cash_Req/Mes'] *100)
+    
+    # SUPUESTO: que le podes sacar x4 de interes que cobra el banco #TODO: agregar un input al usuario
+    estructura_compra['interes_anual'] = buscar_valor('tasa_interes', almacenamiento_datos)
+    estructura_alquiler['interes_anual'] = estructura_compra['interes_anual']  * 4
+    estructura_alquiler['valor_casa'] = buscar_valor('valor_casa', almacenamiento_datos)
+    estructura_compra['valor_casa'] = buscar_valor('valor_casa', almacenamiento_datos)
+
+
+    time.sleep(1)
+    print ('\nCHECKEO DEL COMPRAR')
+    for elemento in estructura_compra:
+        print (elemento, estructura_compra[elemento])
+    time.sleep(1)
+    print ('\nCHECKEO DEL ALQUILAR')
+    for elemento in estructura_alquiler:
+        print (elemento, estructura_alquiler[elemento])
+    time.sleep(1)
+
+    # CREANDO DATAFRAME CON LOS RESULTADOS
+
+     # EXPORTANDO TODO EN EXCEL
 main2()
