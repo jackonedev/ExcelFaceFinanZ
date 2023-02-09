@@ -47,11 +47,9 @@ def ingresar_numerico(label):#TODO: Decorators
         chance = next(x_while) + 1
         print(( 'Intento {} de {}'.format(chance, x_while_limit)))
         ingreso = input('Vuelva a ingresar "{}" = '.format(label))
-        
         if chance == x_while_limit:
             print(( 'Intentos agotados\n'))
             return
-    print(())
     return int(ingreso)
 
 def ingresar_cifra(label):#TODO: 3_10 agregar parametro

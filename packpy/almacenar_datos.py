@@ -79,6 +79,22 @@ class Dicto:
                   valor = round(valor, 2)
                 valor = str(valor).replace(' ', '_').replace('.', ',')
         self.dicture[key] = '{} {}'.format(valor, sufix)
+
+    def lista(self, prefix='', sufix=''):
+        key = self.ultimo_registro()
+        for elemento in self.dicto.keys():
+            if elemento == key:
+                valor = self.dicto[key]
+        if valor and isinstance(valor, list):
+            if prefix:
+                for i, elemento in enumerate(valor):
+                    elemento = self.formato_numerico(elemento)
+                    valor[i] = prefix + ' ' + elemento
+            if sufix:
+                for i, elemento in enumerate(valor):
+                    elemento = self.formato_numerico(elemento)
+                    valor[i] = elemento + ' ' + sufix
+            self.dicture[key] = valor
         
     def __str__(self):
         key = self.ultimo_registro()

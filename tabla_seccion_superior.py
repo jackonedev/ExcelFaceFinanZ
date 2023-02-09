@@ -68,7 +68,7 @@ def main():
         return
     almacenar_datos.ingresar('valor_casa', valor_casa)
     almacenar_datos.prefijo(mon_sym)
-    print( 'Confirmando valor -> ', almacenar_datos)
+    # print( 'Confirmando valor -> ', almacenar_datos)
 
     print()
     print()
@@ -88,10 +88,10 @@ def main():
     
     almacenar_datos.ingresar('desembolso', valor)
     almacenar_datos.prefijo(mon_sym)
-    print( 'Desembolso -> {}'.format(almacenar_datos))
+    # print( 'Desembolso -> {}'.format(almacenar_datos))
     almacenar_datos.ingresar('desembolso_porcentaje', porcentaje)
     almacenar_datos.sufijo('%')
-    print( 'El porcentaje de desembolso -> {}'.format(almacenar_datos))
+    # print( 'El porcentaje de desembolso -> {}'.format(almacenar_datos))
     
     print()
     print()
@@ -111,10 +111,10 @@ def main():
     ##DRY
     almacenar_datos.ingresar(campo.lower().replace(' ','_'), valor)
     almacenar_datos.prefijo(mon_sym)
-    print( 'Valor {} -> {}'.format(campo, almacenar_datos))
+    # print( 'Valor {} -> {}'.format(campo, almacenar_datos))
     almacenar_datos.ingresar(campo.lower().replace(' ','_')+'_pct', porcentaje)
     almacenar_datos.sufijo('%')
-    print( 'Porcenaje {} -> {}'.format(campo, almacenar_datos))
+    # print( 'Porcenaje {} -> {}'.format(campo, almacenar_datos))
     
     print()
     print()
@@ -127,7 +127,7 @@ def main():
         return
     almacenar_datos.ingresar(campo.lower().replace(' ','_'), plazo_año)
     almacenar_datos.sufijo('Años')
-    print( 'Valor {} -> {}'.format(campo, almacenar_datos))
+    # print( 'Valor {} -> {}'.format(campo, almacenar_datos))
 
     print()
     print()
@@ -140,7 +140,7 @@ def main():
         return
     almacenar_datos.ingresar(campo.lower().replace(' ','_'), tasa_interes)
     almacenar_datos.sufijo('%')
-    print( 'Valor {} -> {}'.format(campo, almacenar_datos)      )
+    # print( 'Valor {} -> {}'.format(campo, almacenar_datos)      )
 
 
     print( '\nContinuando la ejecución del programa...\n'    )
@@ -149,7 +149,7 @@ def main():
     #print( dir())
     #print (almacenar_datos.dicto)
 
-    
     return almacenar_datos
+
 if __name__ == '__main__':
     main()
