@@ -102,7 +102,7 @@ def main2():
     estructura_alquiler[f'desembolso {label_desembolso} %'] = 0
     
     estructura_compra['Hip/Alquiler_Mensual'] = - cuota
-    estructura_compra['Ahorros_Mensuales'] += estructura_alquiler['Hip/Alquiler_Mensual'] - cuota
+    estructura_compra['Ahorros_Mensuales'] += cuota - estructura_alquiler['Hip/Alquiler_Mensual']
     estructura_compra['pct_Cash_Req/Mes'] = int((float(estructura_compra['Sueldo_Mensual']) - float(estructura_compra['Ahorros_Mensuales'])) / float(estructura_compra['Sueldo_Mensual']) *100)
     estructura_alquiler['pct_Cash_Req/Mes'] = int(estructura_alquiler['pct_Cash_Req/Mes'] *100)
     
